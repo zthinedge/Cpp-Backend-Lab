@@ -2,6 +2,7 @@
 
 ## 1. 这篇文章解决什么问题？
 
+
 在使用 GitHub 管理项目时，本地 Git 仓库和远程 GitHub 仓库之间需要建立连接。
 
 常见问题包括：
@@ -15,7 +16,15 @@
 6. push 被拒绝和 remote 配置错误该怎么处理？
 ```
 
-这篇笔记主要记录 GitHub SSH 配置、远程仓库绑定和常见远程操作流程。
+这篇笔记主要记录：
+
+```text
+GitHub SSH 配置
+远程仓库绑定
+git init 和 git clone 的使用边界
+fetch、pull、push 的区别
+常见远程报错
+```
 
 ---
 
@@ -262,6 +271,10 @@ git push origin main
 把本地 main 分支推送到 origin 这个远程仓库
 ```
 
+这里建议只把 `remote` 理解成一件事：
+
+> 本地仓库给远程仓库起的别名和绑定关系。
+
 ---
 
 ## 10. 查看远程仓库地址
@@ -390,21 +403,6 @@ git commit -m "init"
 git push -u origin main
 ```
 
-例如：
-
-```bash
-cd Cpp-Backend-Lab
-
-git init
-git branch -M main
-git remote add origin git@github.com:zthinedge/Cpp-Backend-Lab.git
-
-echo "# Cpp-Backend-Lab" > README.md
-git add .
-git commit -m "init"
-git push -u origin main
-```
-
 ---
 
 ## 15. GitHub 仓库已经有 README 时的流程
@@ -426,19 +424,13 @@ git clone git@github.com:username/repo.git
 cd repo
 ```
 
-例如：
-
-```bash
-git clone git@github.com:zthinedge/Cpp-Backend-Lab.git
-cd Cpp-Backend-Lab
-```
-
 然后再修改文件并提交：
 
 ```bash
-echo "# Cpp-Backend-Lab" > README.md
-git add README.md
-git commit -m "docs: update README"
+git status
+git diff
+git add .
+git commit -m "message"
 git push
 ```
 
@@ -529,6 +521,7 @@ git pull
 git push origin main
 git pull origin main
 ```
+
 
 ---
 
@@ -640,6 +633,8 @@ git remote set-url origin git@github.com:zthinedge/Cpp-Backend-Lab.git
 ```bash
 git push
 ```
+
+如果只是地址写错，本质上仍然是更新 `origin` 的绑定关系。
 
 ---
 
@@ -755,6 +750,14 @@ git push -u origin main --force
 
 但正式项目不要随便使用 `--force`。
 
+更推荐先问自己一个问题：
+
+```text
+远程是不是已经有我本地没有的 commit？
+```
+
+如果答案是“有”，优先考虑 `clone` 或先 `pull/fetch`，而不是直接强推。
+
 ---
 
 ## 24. 常用流程总结
@@ -810,7 +813,7 @@ git remote set-url origin git@github.com:username/repo.git
 
 ---
 
-## 25. 一句话总结
+## 25. 总结
 
 ```text
 SSH key 是本地电脑连接 GitHub 的身份凭证，一台电脑通常配置一次即可。
