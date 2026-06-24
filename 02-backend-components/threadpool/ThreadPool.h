@@ -1,13 +1,13 @@
 #pragma once
 
-#include <iostream>
+
 #include <vector>
 #include <queue>
 #include <mutex>
 #include <functional>
 #include <thread>
 #include <condition_variable>
-
+#include <stdexcept>
 class ThreadPool
 {
 private:
@@ -22,7 +22,7 @@ public:
     ~ThreadPool();
 
     ThreadPool(const ThreadPool&)=delete;
-    ThreadPool operator=(const ThreadPool&)=delete;
+    ThreadPool& operator=(const ThreadPool&)=delete;
 
     void enqueue(std::function<void()>task);
 

@@ -1,6 +1,10 @@
 #include "ThreadPool.h"
 ThreadPool::ThreadPool(size_t thread_count)
 {
+    if (thread_count == 0) {
+        throw std::invalid_argument("thread_count must be greater than 0");
+    }
+
     for(size_t i=0;i<thread_count;i++){
         workers_.emplace_back(&ThreadPool::workerLoop, this);
     }
@@ -33,6 +37,7 @@ void ThreadPool::enqueue(std::function<void()>task){
     }
     cv_.notify_one();
 }
+
 void ThreadPool::workerLoop(){
     while(true){
         std::function<void()>task;
