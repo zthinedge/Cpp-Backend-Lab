@@ -20,6 +20,7 @@ void testAcquireConnection()
     assert(conn->execute("select 1"));
 }
 
+//连接用完离开作用域后，会自动归还到连接池。
 void testConnectionAutoReturn()
 {
     MySqlConnectionPool pool(1);
@@ -36,6 +37,7 @@ void testConnectionAutoReturn()
     assert(conn->id() == first_id);
 }
 
+//多线程借用连接
 void testConcurrentAcquire()
 {
     MySqlConnectionPool pool(3);
@@ -62,6 +64,7 @@ void testConcurrentAcquire()
     assert(success_count == thread_count);
 }
 
+//连接池无连接时acquire阻塞等待 连接归还后拿到连接
 void testAcquireBlocksUntilConnectionReturned()
 {
     MySqlConnectionPool pool(1);
