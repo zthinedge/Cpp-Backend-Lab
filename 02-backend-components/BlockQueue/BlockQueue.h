@@ -23,8 +23,8 @@ private:
     std::queue<T> queue_;
     size_t capacity_;
     mutable std::mutex mutex_;
-    std::condition_variable not_empty_;
-    std::condition_variable not_full_;
+    std::condition_variable not_empty_; //给消费者等
+    std::condition_variable not_full_;  //给生产者等
     bool closed_ = false;
 };
 
@@ -43,7 +43,7 @@ BlockQueue<T>::~BlockQueue()
 {
     close();
 }
-
+//针对生产者
 template <typename T>
 void BlockQueue<T>::push(T value)
 {
@@ -58,9 +58,11 @@ void BlockQueue<T>::push(T value)
     }
 
     queue_.push(std::move(value));
+    //唤醒一个消费者线程
     not_empty_.notify_one();
 }
 
+//针对消费者
 template <typename T>
 bool BlockQueue<T>::pop(T &value)
 {
@@ -88,7 +90,7 @@ void BlockQueue<T>::close()
         std::lock_guard<std::mutex> lock(mutex_);
         closed_ = true;
     }
-
+    //唤醒所有休眠的线程
     not_empty_.notify_all();
     not_full_.notify_all();
 }
