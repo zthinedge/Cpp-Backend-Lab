@@ -13,6 +13,9 @@ public:
     explicit BlockQueue(size_t capacity);
     ~BlockQueue();
 
+    BlockQueue(const BlockQueue&) = delete;
+    BlockQueue& operator=(const BlockQueue&) = delete;
+
     void push(T value);
     bool pop(T &value);
     void close();
