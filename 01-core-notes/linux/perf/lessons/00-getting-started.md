@@ -18,16 +18,16 @@
 
 ## 2. 打开正确的目录
 
-在终端输入：
+先进入你下载或克隆的 `Cpp-Backend-Lab` 仓库根目录，然后输入：
 
 ```bash
-cd /home/zym/Share/Cpp-Backend-Lab/01-core-notes/linux/perf
+cd 01-core-notes/linux/perf
 ```
 
 逐段解释：
 
 - `cd` 是 change directory 的缩写，意思是“切换目录”。
-- 后面一长串文字是目标目录的完整路径。
+- `01-core-notes/linux/perf` 是相对于仓库根目录的路径。
 - 命令执行成功时通常没有输出。Linux 中“没有输出”经常代表没有出错。
 
 确认自己在哪里：
@@ -36,10 +36,11 @@ cd /home/zym/Share/Cpp-Backend-Lab/01-core-notes/linux/perf
 pwd
 ```
 
-`pwd` 会打印当前目录。预期输出：
+`pwd` 会打印当前目录。每个人保存仓库的位置不同，因此前面的路径可能不同，但输出
+应该以这一段结尾：
 
 ```text
-/home/zym/Share/Cpp-Backend-Lab/01-core-notes/linux/perf
+Cpp-Backend-Lab/01-core-notes/linux/perf
 ```
 
 ## 3. 检查工具
@@ -133,4 +134,3 @@ report = 打开详细检查报告
 ```
 
 下一步：[第 1 课：第一次性能体检](01-perf-stat.md)。
-

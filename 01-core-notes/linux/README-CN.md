@@ -8,6 +8,7 @@
 | 主题 | 你会学到什么 | 状态 |
 | --- | --- | --- |
 | [perf 性能分析](perf/README-CN.md) | 程序与进程、`perf stat`、热点函数、调用链、CPU Cache | 可运行 |
+| [C++ 内存错误诊断](memory-debugging/README-CN.md) | Valgrind、ASan、UBSan、泄漏与非法内存访问 | 可运行 |
 
 ## perf 零基础实验室
 
@@ -28,6 +29,17 @@ cd perf
 make
 ```
 
+## 内存错误诊断实验室
+
+内存诊断课程通过故意包含错误的程序，分别展示泄漏、堆越界、释放后使用、未初始化
+读取和未定义行为。课程入口：
+
+1. [认识内存错误](memory-debugging/lessons/00-memory-errors.md)
+2. [Valgrind](memory-debugging/lessons/01-valgrind.md)
+3. [AddressSanitizer](memory-debugging/lessons/02-asan.md)
+4. [UBSan](memory-debugging/lessons/03-ubsan.md)
+5. [工具选择与工作流](memory-debugging/lessons/04-workflow.md)
+
 ## 后续计划
 
 - 进程、线程与上下文切换
@@ -38,4 +50,3 @@ make
 - `strace`、`gdb` 和其他诊断工具
 
 规划中的主题会在内容真正加入仓库后补充链接，避免出现无法访问的空目录导航。
-
