@@ -1,35 +1,57 @@
-# C++ 内存错误诊断实验室
+# 从零学习 C++ 内存错误诊断
 
-通过故意包含错误的 C++ 程序，从零学习 Valgrind、AddressSanitizer（ASan）和
-UndefinedBehaviorSanitizer（UBSan）。
+这个 Lab 不是只教你背一条“查内存泄漏”的命令，而是帮助你建立完整流程：
 
-## 你会学到什么？
-
-- 区分内存泄漏、越界访问、释放后使用和未初始化读取；
-- 用 Valgrind 检查普通编译的程序；
-- 用 ASan 快速定位越界、释放后使用和泄漏；
-- 用 UBSan 检查部分 C++ 未定义行为；
-- 根据开发阶段和运行环境选择工具。
-
-## 课程
-
-| 顺序 | 课程 | 内容 |
-| --- | --- | --- |
-| 0 | [先认识内存错误](lessons/00-memory-errors.md) | 五类错误与实验安全说明 |
-| 1 | [Valgrind 入门](lessons/01-valgrind.md) | Memcheck、泄漏摘要和错误栈 |
-| 2 | [AddressSanitizer 入门](lessons/02-asan.md) | 编译插桩与 ASan 报告 |
-| 3 | [UBSan 入门](lessons/03-ubsan.md) | 检查部分未定义行为 |
-| 4 | [工具选择与实际工作流](lessons/04-workflow.md) | 对比工具并分析自己的项目 |
-
-## 快速检查
-
-```bash
-./scripts/check-env.sh
-make
+```text
+认识错误类型
+    ↓
+使用工具得到报告
+    ↓
+找到第一次非法操作
+    ↓
+回到源码修复
+    ↓
+重新运行测试确认错误消失
 ```
 
-请从第 0 课开始，不要直接批量运行所有错误示例。每个示例都会故意触发一种错误，
-Sanitizer 中止程序或 Valgrind 返回错误报告都是预期结果。
+## 为什么同时学习三种工具？
 
-完整说明见[中文课程入口](README-CN.md)。
+| 工具 | 使用方式 | 主要用途 |
+| --- | --- | --- |
+| Valgrind Memcheck | 在工具中运行普通程序 | 泄漏、非法访问、未初始化值 |
+| AddressSanitizer | 编译时加入 `-fsanitize=address` | 越界、释放后使用、重复释放、泄漏 |
+| UBSan | 编译时加入 `-fsanitize=undefined` | 部分 C++ 未定义行为 |
+
+它们不是互相替代的关系。ASan 通常更快，适合日常开发和自动测试；Valgrind 不要求
+重新插桩编译，并且擅长追踪未初始化值；UBSan 检查的是另一组语言层面的错误。
+
+## 目录
+
+```text
+memory-debugging/
+├── README.md
+├── README-CN.md
+├── Makefile
+├── examples/
+│   └── memory_errors.cpp
+├── lessons/
+│   ├── 00-memory-errors.md
+│   ├── 01-valgrind.md
+│   ├── 02-asan.md
+│   ├── 03-ubsan.md
+│   └── 04-workflow.md
+└── scripts/
+    └── check-env.sh
+```
+
+## 学习顺序
+
+1. [先认识内存错误](lessons/00-memory-errors.md)
+2. [Valgrind 入门](lessons/01-valgrind.md)
+3. [AddressSanitizer 入门](lessons/02-asan.md)
+4. [UBSan 入门](lessons/03-ubsan.md)
+5. [工具选择与实际工作流](lessons/04-workflow.md)
+
+完成后，你应该能看懂报告中的错误类型、源码位置和调用栈，并知道下一步先检查
+哪一行代码。
 

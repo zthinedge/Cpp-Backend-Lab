@@ -11,12 +11,12 @@
 | [BlockQueue](BlockQueue/README-CN.md) | 有界缓冲、生产者消费者、关闭后唤醒 | 测试通过 |
 | [AsyncLogger](AsyncLogger/README-CN.md) | 业务线程与文件写入解耦、后台消费日志 | 测试通过 |
 | [ConnectionPool](ConnectionPool/README-CN.md) | 固定容量、阻塞获取、连接自动归还 | 测试通过 |
+| [EventLoop](EventLoop/README-CN.md) | epoll 事件分发、跨线程任务调度、安全退出 | 测试通过 |
 
 ## 规划中的组件
 
 | 组件 | 计划内容 |
 | --- | --- |
-| EventLoop | I/O 事件注册、分发和生命周期管理 |
 | Timer | 延时任务、周期任务和超时处理 |
 
 ## 如何运行

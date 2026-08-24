@@ -40,7 +40,7 @@
 | [BlockQueue](02-backend-components/BlockQueue/README-CN.md) | 有界队列、生产者消费者、阻塞唤醒 | 已实现、测试通过 |
 | [AsyncLogger](02-backend-components/AsyncLogger/README-CN.md) | 前后台线程解耦、日志队列、批量写入 | 已实现、测试通过 |
 | [ConnectionPool](02-backend-components/ConnectionPool/README-CN.md) | 连接复用、阻塞获取、自定义删除器自动归还 | 已实现、测试通过 |
-| EventLoop | I/O 事件分发与异步调度 | 规划中 |
+| [EventLoop](02-backend-components/EventLoop/README-CN.md) | epoll 事件分发与跨线程任务调度 | 已实现、测试通过 |
 | Timer | 延时任务、周期任务与超时管理 | 规划中 |
 
 ## 仓库结构
